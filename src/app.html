@@ -9,7 +9,19 @@
     <div if.bind="notes" repeat.for="note of notesReverse">
       <div class="notification is-info task">
         <strong>${note.text}</strong>
-        <div style="overflow: auto;">
+        <div style="float:right">
+          <button class="button is-small" click.delegate="forwardwind(note)">
+            <span class="icon">
+              <i class="fas fa-chevron-up"></i>
+            </span>
+          </button>
+          <button class="button is-small" click.delegate="rewind(note)">
+            <span class="icon">
+              <i class="fas fa-chevron-down"></i>
+            </span>
+          </button>
+        </div>
+        <div style="overflow: auto; clear: both">
           <span class="small time">${note.time | shortDateTime}</span>
           <span class="small diff" if.bind="$index > 0">
             ${minsDiff(notesReverse[$index].time,notesReverse[$index-1].time)} mins

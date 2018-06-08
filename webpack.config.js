@@ -17,20 +17,20 @@ const title = 'Timetracker 2';
 const outDir = path.resolve(__dirname, project.platform.output);
 const srcDir = path.resolve(__dirname, 'src');
 const nodeModulesDir = path.resolve(__dirname, 'node_modules');
-const baseUrl = '/tt/2/';
+const baseUrl = '/';
 
 const cssRules = [
-  { loader: 'css-loader' },
+  { loader: 'css-loader' }
 ];
 
 module.exports = ({production, server, extractCss, coverage, analyze} = {}) => ({
   resolve: {
     extensions: ['.js'],
-    modules: [srcDir, 'node_modules'],
+    modules: [srcDir, 'node_modules']
   },
   entry: {
     app: ['aurelia-bootstrapper'],
-    vendor: ['bluebird'],
+    vendor: ['bluebird']
   },
   mode: production ? 'production' : 'development',
   output: {
@@ -57,7 +57,7 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
         use: extractCss ? ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: cssRules
-        }) : ['style-loader', ...cssRules],
+        }) : ['style-loader', ...cssRules]
       },
       {
         test: /\.css$/i,
@@ -78,7 +78,7 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
       },
       { test: /\.html$/i, loader: 'html-loader' },
       { test: /\.js$/i, loader: 'babel-loader', exclude: nodeModulesDir,
-        options: coverage ? { sourceMap: 'inline', plugins: [ 'istanbul' ] } : {},
+        options: coverage ? { sourceMap: 'inline', plugins: [ 'istanbul' ] } : {}
       },
       { test: /\.json$/i, loader: 'json-loader' },
       // use Bluebird as the global Promise implementation:
@@ -88,7 +88,7 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
       { test: /\.woff2(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'url-loader', options: { limit: 10000, mimetype: 'application/font-woff2' } },
       { test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'url-loader', options: { limit: 10000, mimetype: 'application/font-woff' } },
       // load these fonts normally, as files:
-      { test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'file-loader' },
+      { test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'file-loader' }
     ]
   },
   plugins: [

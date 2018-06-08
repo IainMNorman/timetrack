@@ -1,51 +1,58 @@
 export class App {
   notes = [];
-  noteText = "";
+  noteText = '';
 
   constructor() {
-    if (localStorage.notes != undefined)
-    {
-      this.notes = localStorage.getObj("notes");
-    }  
+    if (localStorage.notes !== undefined) {
+      this.notes = localStorage.getObj('notes');
+    }
   }
 
   addNote(e) {
-    if (e.keyCode == 13) {
+    if (e.keyCode === 13) {
       let note = {};
       note.time = new Date().toJSON();
       note.text = this.noteText;
       this.notes.push(note);
-      localStorage.setObj("notes", this.notes);
-      this.noteText = "";
-      console.log(note);
+      this.updateLocalStorage();
+      this.noteText = '';
     }
   }
 
-  minsDiff(date1, date2)
-  {
-    var d1 = new Date(date1);
-    var d2 = new Date(date2);
+  minsDiff(date1, date2) {
+    let d1 = new Date(date1);
+    let d2 = new Date(date2);
 
     return Math.round(Math.abs(d2 - d1) / 60000);
   }
 
-  get notesReverse()
-  {
+  get notesReverse() {
     return this.notes.slice().reverse();
   }
 
-  removeAll()
-  {
+  removeAll() {
     this.notes = [];
-    localStorage.setObj("notes", this.notes);
+    this.updateLocalStorage();
   }
 
+  rewind(note) {
+    note.time = (new Date(new Date(note.time).getTime() - 60000)).toJSON();
+    this.updateLocalStorage();
+  }
+
+  forwardwind(note) {
+    note.time = (new Date(new Date(note.time).getTime() + 60000)).toJSON();
+    this.updateLocalStorage();
+  }
+
+  updateLocalStorage() {
+    localStorage.setObj('notes', this.notes);
+  }
 }
 
-Storage.prototype.setObj = function (key, obj) {
-  return this.setItem(key, JSON.stringify(obj))
-}
-Storage.prototype.getObj = function (key) {
-  return JSON.parse(this.getItem(key))
-}
-
+Storage.prototype.setObj = function(key, obj) {
+  return this.setItem(key, JSON.stringify(obj));
+};
+Storage.prototype.getObj = function(key) {
+  return JSON.parse(this.getItem(key));
+};
