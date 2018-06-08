@@ -1,0 +1,22 @@
+<template>
+  <require from="./resources/value-converters/short-date-time"></require>
+  <require from="./app.scss"></require>
+  <div class="container">
+    <div class="input-container">
+      <input class="input is-large" type="text" placeholder="Enter task note" keyup.trigger="addNote($event)" value.bind="noteText">
+    </div>
+
+    <div if.bind="notes" repeat.for="note of notesReverse">
+      <div class="notification is-info task">
+        <strong>${note.text}</strong>
+        <div style="overflow: auto;">
+          <span class="small time">${note.time | shortDateTime}</span>
+          <span class="small diff" if.bind="$index > 0">
+            ${minsDiff(notesReverse[$index].time,notesReverse[$index-1].time)} mins
+          </span>
+        </div>
+      </div>
+    </div>
+    <button class="button is-danger" click.delegate="removeAll()">Remove all</button>
+  </div>
+</template>
