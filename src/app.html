@@ -10,12 +10,12 @@
       <div class="notification is-info task">
         <strong>${note.text}</strong>
         <div style="float:right">
-          <button class="button is-small" click.delegate="forwardwind(note)">
+          <button class="button is-small" click.delegate="forwardwind($event, note)">
             <span class="icon">
               <i class="fas fa-chevron-up"></i>
             </span>
           </button>
-          <button class="button is-small" click.delegate="rewind(note)">
+          <button class="button is-small" click.delegate="rewind($event, note)">
             <span class="icon">
               <i class="fas fa-chevron-down"></i>
             </span>
