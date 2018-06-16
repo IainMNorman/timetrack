@@ -35,14 +35,20 @@ export class App {
     this.updateLocalStorage();
   }
 
-  rewind(evt, note) {
-    let delta = evt.ctrlKey ? 300000 : 60000;
-    note.time = (new Date(new Date(note.time).getTime() - delta)).toJSON();
-    this.updateLocalStorage();
+  delete(note) {
+    this.notes.splice(this.notes.findIndex(item => item.text === note.text), 1);
   }
 
-  forwardwind(evt, note) {
-    let delta = evt.ctrlKey ? 300000 : 60000;
+  changeTime(evt,note, delta) {
+    if (evt.ctrlKey)
+    {
+      delta *= 10;      
+    }
+
+    if (evt.shiftKey) {
+      delta *= 60;
+    }
+
     note.time = (new Date(new Date(note.time).getTime() + delta)).toJSON();
     this.updateLocalStorage();
   }
