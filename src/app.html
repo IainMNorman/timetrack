@@ -1,5 +1,6 @@
 <template>
   <require from="./resources/value-converters/short-date-time"></require>
+  <require from="./resources/value-converters/mins-to-hours-mins"></require>
   <require from="./app.scss"></require>
   <div class="container">
     <div class="input-container">
@@ -29,7 +30,7 @@
         <div style="overflow: auto; clear: both">
           <span class="small time">${note.time | shortDateTime}</span>
           <span class="small diff" if.bind="$index > 0">
-            ${minsDiff(notesReverse[$index].time,notesReverse[$index-1].time)} mins
+            ${minsDiff(notesReverse[$index].time,notesReverse[$index-1].time) | minsToHoursMins}
           </span>
         </div>
       </div>
